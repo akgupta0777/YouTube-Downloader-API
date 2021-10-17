@@ -19,7 +19,7 @@ app.get('/download',(req,res) => {
     }).pipe(res);
 })
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port,() => {
     console.log(`Green Lights! Server is up and running on ${port}`);
 })

@@ -1,0 +1,24 @@
+{
+  "name": "yt-downloader-server",
+  "version": "1.0.0",
+  "description": "This is the core implementation of my YT Downloader website.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akgupta0777/YT-Downloader-Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akgupta0777/YT-Downloader-Server/issues"
+  },
+  "homepage": "https://github.com/akgupta0777/YT-Downloader-Server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "ytdl-core": "^4.9.1"
+  }
+}

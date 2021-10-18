@@ -5,7 +5,10 @@ const app =  express();
 app.use(cors());
 
 const getAvailableFormats = async (videoID) => {
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({
+    headless:true,
+    args: ["--no-sandbox"]
+  })
   const page = await browser.newPage();
   await page.goto(`https://www.y2mate.com/youtube/${videoID}`);
   await page.waitForSelector('td');
@@ -23,7 +26,10 @@ const getAvailableFormats = async (videoID) => {
 }
 
 const getVideoLink =  async (videoID,index) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless:true,
+    args: ["--no-sandbox"]
+  });
   const page = await browser.newPage();
   await page.goto(`https://www.y2mate.com/youtube/${videoID}`,{
     waitUntil:'networkidle0'

@@ -10,8 +10,9 @@ const getAvailableFormats = async (videoID) => {
     args: ["--no-sandbox"]
   })
   const page = await browser.newPage();
-  await page.goto(`https://www.y2mate.com/youtube/${videoID}`);
-  await page.waitForSelector('td');
+  await page.goto(`https://www.y2mate.com/youtube/${videoID}`,{
+    waitUntil:'networkidle0'
+  });
   const elements = await page.evaluate(() => Array.from(document.querySelectorAll("td"),e => e.innerText));
   const formats = [];
   for(let i=0;i<elements.length;i+=3){

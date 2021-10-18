@@ -2,7 +2,7 @@
   "name": "yt-downloader-server",
   "version": "1.0.0",
   "description": "This is the core implementation of my YT Downloader website.",
-  "main": "app.js",
+  "main": "Engine.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node Engine.js"
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/akgupta0777/YT-Downloader-Server.git"
   },
-  "author": "",
+  "author": "Abhay Gupta",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/akgupta0777/YT-Downloader-Server/issues"

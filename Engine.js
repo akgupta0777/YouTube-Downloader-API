@@ -37,16 +37,24 @@ const getVideoLink =  async (videoID,index) => {
 }
 
 app.get('/download',async (req,res) => {
+    try{
     const videoID = req.query.videoID;
     const index = req.query.index;
     const videoLink = await getVideoLink(videoID,index);
     res.redirect(videoLink);
+    }catch(err){
+      console.log(err);
+    }
 })
 
 app.get('/getAvailableFormats',async (req,res) => {
+  try{
   const videoID = req.query.videoID;
   const formats = await getAvailableFormats(videoID);
   res.send(formats);
+  }catch(err){
+    console.log(err);
+  }
 })
 
 const port = process.env.PORT || 5000;

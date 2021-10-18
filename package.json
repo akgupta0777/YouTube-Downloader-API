@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node app.js"
+    "start": "node Engine.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "ytdl-core": "^4.9.1"
+    "puppeteer": "^10.4.0"
   }
 }

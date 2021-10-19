@@ -4,14 +4,23 @@ const puppeteer = require('puppeteer');
 const app =  express();
 app.use(cors());
 
+const chromeOptions = {
+  headless: true,
+  defaultViewport: null,
+  args: [
+      "--no-sandbox",
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      "--single-process",
+      "--no-zygote"
+  ],
+};
+
 const getAvailableFormats = async (videoID) => {
-  const browser = await puppeteer.launch({
-    headless:true,
-    args: ['--no-sandbox','--disable-setuid-sandbox']
-  })
+  const browser = await puppeteer.launch(chromeOptions)
   const page = await browser.newPage();
   await page.goto(`https://www.y2mate.com/youtube/${videoID}`,{
-    waitUntil:'networkidle0'
+    waitUntil:'networkidle2'
   });
   const elements = await page.evaluate(() => Array.from(document.querySelectorAll("td"),e => e.innerText));
   const formats = [];
@@ -27,13 +36,10 @@ const getAvailableFormats = async (videoID) => {
 }
 
 const getVideoLink =  async (videoID,index) => {
-  const browser = await puppeteer.launch({
-    headless:true,
-    args: ['--no-sandbox','--disable-setuid-sandbox']
-  });
+  const browser = await puppeteer.launch(chromeOptions);
   const page = await browser.newPage();
   await page.goto(`https://www.y2mate.com/youtube/${videoID}`,{
-    waitUntil:'networkidle0'
+    waitUntil:'networkidle2'
   });
   let btns = await page.$$("a[type=button]");
   await btns[index].click();
@@ -64,6 +70,7 @@ app.get('/getAvailableFormats',async (req,res) => {
   }
 })
 
+// Port for server.
 const port = process.env.PORT || 5000;
 app.listen(port,async () => {
     console.log(`Green Lights! Server is up and running on port ${port}`);

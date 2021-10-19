@@ -11,8 +11,6 @@ const chromeOptions = {
       "--no-sandbox",
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
-      "--single-process",
-      "--no-zygote"
   ],
 };
 
@@ -46,6 +44,7 @@ const getVideoLink =  async (videoID,index) => {
   await page.waitForSelector('.btn.btn-success.btn-file');
   const videoLink = await page.$eval('a.btn.btn-success.btn-file',e => e.href);
   await browser.close();
+  console.log(videoLink);
   return videoLink;
 }
 

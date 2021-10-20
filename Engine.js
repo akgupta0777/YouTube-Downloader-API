@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const puppeteer = require('puppeteer');
-const {TimeoutError} = require('puppeteer/Errors');
 const app =  express();
 app.use(cors());
 
@@ -44,7 +43,7 @@ const getVideoInfo = async (videoURL) => {
   return info;
   }catch(err){
     console.log("VIDEO INFO ",err);
-    if(err instanceof TimeoutError)
+    if(err instanceof puppeteer.errors.TimeoutError)
       return "VIDEO NOT FOUND";
   }
 }

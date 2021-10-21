@@ -32,13 +32,16 @@ const getVideoInfo = async (videoURL) => {
   info.push({thumbnail,title,channel,length});
   const formats = await page.$$eval('select#formatSelect option',(options) => options.map(option => {
       const format = option.parentElement.label;
+      const textContent = option.textContent.trim();
+      let arr = textContent.split(" ");
       return {
           "value":option.value,
           "format":format,
-          "size":option.textContent.trim()
+          "size":`${arr[1]} ${arr[2]}`
       } 
   }));
   info.push(formats);
+  console.log(info);
   await browser.close();
   return info;
   }catch(err){

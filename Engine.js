@@ -34,7 +34,8 @@ const getVideoInfo = async (videoURL) => {
       const format = option.parentElement.label;
       return {
           "value":option.value,
-          "format":format
+          "format":format,
+          "size":option.textContent.trim()
       } 
   }));
   info.push(formats);

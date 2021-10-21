@@ -70,11 +70,15 @@ const getVideoLink =  async (videoURL,value,format) => {
   }
 }
 
+app.get('/', () => {
+  res.send("Server started");
+})
+
 app.get('/download',async (req,res) => {
     try{
-    const videoURL = req.query.videoURL;
-    const value = req.query.value;
-    const format = req.query.format;
+    const videoURL = req.query.url;
+    const value = req.query.v;
+    const format = req.query.f;
     const videoLink = await getVideoLink(videoURL,value,format);
     res.redirect(videoLink);
     }catch(err){
@@ -84,7 +88,7 @@ app.get('/download',async (req,res) => {
 
 app.get('/getVideo',async (req,res) => {
   try{
-  const videoURL = req.query.videoURL;
+  const videoURL = req.query.url;
   const videoData = await getVideoInfo(videoURL);
   if(!Array.isArray(videoData)){
     res.send("Video Not Found!");

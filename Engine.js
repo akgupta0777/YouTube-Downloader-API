@@ -23,7 +23,7 @@ const getVideoInfo = async (videoURL) => {
   });
   await page.$eval('input[name=q]', (el,value) => el.value = value,videoURL);
   await (await page.$('button.btn-red')).click();
-  await page.waitForSelector("div.thumbnail > img[src]",{timeout:5000});
+  await page.waitForSelector("div.thumbnail > img[src]",{timeout:8000});
   const info = [];
   const thumbnail = await page.$eval('.thumbnail img[src]', imgs => imgs.getAttribute('src'));
   const title = await page.$eval('.clearfix h3',e => e.innerText);
@@ -39,7 +39,6 @@ const getVideoInfo = async (videoURL) => {
       } 
   }));
   info.push(formats);
-  console.log(info);
   await browser.close();
   return info;
   }catch(err){
@@ -81,7 +80,9 @@ app.get('/download',async (req,res) => {
     const value = req.query.v;
     const format = req.query.f;
     const videoLink = await getVideoLink(videoURL,value,format);
-    res.redirect(videoLink);
+    if(videoLink){
+      res.redirect(videoLink);
+    }else res.send({code:404});
     }catch(err){
       console.log(err);
     }
@@ -91,9 +92,6 @@ app.get('/getVideo',async (req,res) => {
   try{
   const videoURL = req.query.url;
   const videoData = await getVideoInfo(videoURL);
-  if(!Array.isArray(videoData)){
-    res.send("Video Not Found!");
-  }
   res.send(videoData);
   }catch(err){
     console.log(err);

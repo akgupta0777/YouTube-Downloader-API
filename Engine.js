@@ -70,7 +70,7 @@ const getVideoLink =  async (videoURL,value,format) => {
   }
 }
 
-app.get('/', () => {
+app.get('/', (req,res) => {
   res.send("Server started");
 })
 

@@ -103,5 +103,6 @@ app.get('/getVideo',async (req,res) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port,async () => {
-    console.log(`Green Lights! Server is up and running on port ${port}`);
+    console.log(`%cGreen Lights! Server is up and running on port ${port}`,
+    'color:green;');
 })

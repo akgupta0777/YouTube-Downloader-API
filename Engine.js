@@ -5,7 +5,7 @@ const app =  express();
 app.use(cors());
 
 const chromeOptions = {
-  headless: true,
+  headless: false,
   defaultViewport: null,
   args: [
       "--no-sandbox",
@@ -15,15 +15,15 @@ const chromeOptions = {
 };
 
 const getVideoInfo = async (videoURL) => {
-  try{
   const browser = await puppeteer.launch(chromeOptions)
+  try{
   const page = await browser.newPage();
   await page.goto('https://yt5s.com',{
     waitUntil:'networkidle2'
   });
   await page.$eval('input[name=q]', (el,value) => el.value = value,videoURL);
   await (await page.$('button.btn-red')).click();
-  await page.waitForSelector("div.thumbnail > img[src]",{timeout:8000});
+  await page.waitForSelector("div.thumbnail > img[src]",{timeout:5000});
   const info = [];
   const thumbnail = await page.$eval('.thumbnail img[src]', imgs => imgs.getAttribute('src'));
   const title = await page.$eval('.clearfix h3',e => e.innerText);
@@ -42,18 +42,18 @@ const getVideoInfo = async (videoURL) => {
   }));
   info.push(formats);
   console.log(info);
-  await browser.close();
   return info;
   }catch(err){
     console.log("VIDEO INFO ",err);
-    if(err instanceof puppeteer.errors.TimeoutError)
-      return "VIDEO NOT FOUND";
+    return 'error'
+  }finally{
+    await browser.close();
   }
 }
 
 const getVideoLink =  async (videoURL,value,format) => {
-  try{
   const browser = await puppeteer.launch(chromeOptions);
+  try{
   const page = await browser.newPage();
   await page.goto('https://yt5s.com',{
     waitUntil:'networkidle2'
@@ -70,6 +70,8 @@ const getVideoLink =  async (videoURL,value,format) => {
   return videoLink;
   }catch(err){
     console.log("[DOWNLOAD] ",err);
+  }finally{
+    await browser.close();
   }
 }
 

@@ -45,7 +45,7 @@ const getVideoInfo = async (videoURL) => {
   return info;
   }catch(err){
     console.log("VIDEO INFO ",err);
-    return 'error'
+    return {'error':404};
   }finally{
     await browser.close();
   }

@@ -5,7 +5,7 @@ const app =  express();
 app.use(cors());
 
 const chromeOptions = {
-  headless: false,
+  headless: true,
   defaultViewport: null,
   args: [
       "--no-sandbox",

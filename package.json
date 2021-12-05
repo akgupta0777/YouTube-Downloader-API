@@ -4,7 +4,6 @@
   "description": "This is the core implementation of my YT Downloader website.",
   "main": "Engine.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node Engine.js"
   },
   "repository": {

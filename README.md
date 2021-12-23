@@ -11,9 +11,11 @@ After **Installation** run `node Engine.js` in the root directory to start local
 By default the local server will run on `localhost:5000`
 
 # Usage
-**GET** `/getVideo?url=<YOUTUBE_VIDEO_URL>` - This request will give you a list of all the video formats available for download from youtube video.
+**Get Video Details and available formats**
 
-**PARAMS** 
+**`GET`** `/getVideo?url=<YOUTUBE_VIDEO_URL>` - This request will give you a list of all the video formats available for download from youtube video.
+
+**`PARAMS`** 
 - url - The URL for youtube video you want to download.
 
 **Example** 
@@ -39,10 +41,11 @@ By default the local server will run on `localhost:5000`
  ]
 ]
 ```
+**Download the youtube video with available formats**
 
-**GET** `/download?url=<YOUTUBE_VIDEO_URL>&v=<YOUTUBE_VIDEO_RESOLUTION>&f=<VIDEO_FORMAT>` - This get request will download the youtube video from **yt5s.com**.
+**`GET`** `/download?url=<YOUTUBE_VIDEO_URL>&v=<YOUTUBE_VIDEO_RESOLUTION>&f=<VIDEO_FORMAT>` - This get request will download the youtube video from **yt5s.com**.
 
-**PARAMS** 
+**`PARAMS`** 
 - url - The URL for youtube video you want to download.
 - v - The value for resolution you want to download. Example 1080p,720p,etc.(See the data above).
 - f - The format for the download video. Example mp4,3gp,etc.

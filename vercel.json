@@ -2,7 +2,7 @@
     "builds": [
         {
             "src": "Engine.js",
-            "use": "@now/node"
+            "use": "@vercel/node"
         }
     ],
     "routes": [

@@ -41,10 +41,11 @@ const getVideoInfo = async (videoURL) => {
       } 
   }));
   info.push(formats);
-  console.log(info);
+  console.log("[VIDEO FOUND]")
+  console.log(info[0]);
   return info;
   }catch(err){
-    console.log("VIDEO INFO ",err);
+    console.log("[VIDEO INFO] ",err);
     return {'error':404};
   }finally{
     await browser.close();
@@ -65,7 +66,7 @@ const getVideoLink =  async (videoURL,value,format) => {
   await (await page.$('button#btn-action')).click();
   await page.waitForSelector('a.form-control.mesg-convert.success',{visible: true});
   const videoLink = await page.$eval('a.form-control.mesg-convert.success',el => el.href);
-  console.log(videoLink);
+  console.log(`Downloading youtube video ${videoURL} with quality ${value} and ${format}`);
   await browser.close();
   return videoLink;
   }catch(err){
@@ -89,7 +90,7 @@ app.get('/download',async (req,res) => {
       res.redirect(videoLink);
     }else res.send({code:404});
     }catch(err){
-      console.log(err);
+      console.log("[GET /download]",err);
     }
 })
 
@@ -99,7 +100,7 @@ app.get('/getVideo',async (req,res) => {
   const videoData = await getVideoInfo(videoURL);
   res.send(videoData);
   }catch(err){
-    console.log(err);
+    console.log("[GET /getVideo] ",err);
   }
 })
 
